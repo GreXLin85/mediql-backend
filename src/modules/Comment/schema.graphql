@@ -1,0 +1,31 @@
+type Query {
+  comment(id: ID!): Comment
+  comments: [Comment]!
+}
+
+input CommentCreateInput {
+  postId: ID!
+  comment: String!
+  authorId: ID!
+}
+
+input CommentUpdateInput {
+  postId: ID
+  comment: String
+  authorId: ID
+}
+
+type Mutation {
+  createComment(comment: CommentCreateInput!): Comment
+  updateComment(id: ID!, comment: CommentUpdateInput!): Comment
+  deleteComment(id: ID!): Comment
+}
+
+scalar DateTime
+
+type Comment {
+  id: ID!
+  post: Post!
+  comment: String!
+  author: User!
+}

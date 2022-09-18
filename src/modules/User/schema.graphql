@@ -1,0 +1,45 @@
+type Query {
+  user(id: ID!): User
+  users: [User!]!
+}
+
+input UserCreateInput {
+  email: String!
+  password: String!
+  name: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input UserUpdateInput {
+  email: String
+  name: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type Mutation {
+  login(email: String!, password: String!): AuthPayload!
+  signup(email: String!, password: String!, name: String): AuthPayload!
+  createUser(user: UserCreateInput!): User
+  updateUser(id: ID!, user: UserUpdateInput!): User
+  deleteUser(id: ID!): User
+}
+
+scalar DateTime
+
+type User {
+  id: ID!
+  email: String!
+  password: String!
+  name: String
+  posts: [Post]
+  comments: [Comment]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
