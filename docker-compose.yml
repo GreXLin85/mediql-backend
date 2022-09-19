@@ -13,7 +13,6 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
-
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -27,7 +26,15 @@ services:
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     restart: unless-stopped
-
+  cache:
+    container_name: rediscache
+    image: redis:7.0.4-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
+      - cache:/data
   mediql-api:
     stdin_open: true
     build:
@@ -36,10 +43,22 @@ services:
     container_name: mediql-api
     depends_on:
       - postgres
+      - cache
     ports:
       - "4000:4000"
     restart: always
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: mediqldb
+      REDIS_HOST: cache
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      JWT_SECRET: secret
 
 volumes:
   postgres-data:
   pgadmin-data:
+  cache:
