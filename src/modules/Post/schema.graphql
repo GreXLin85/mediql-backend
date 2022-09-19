@@ -4,18 +4,13 @@ type Query {
 }
 
 input PostCreateInput {
-  createdAt: DateTime!
-  updatedAt: DateTime!
   published: Boolean!
   title: String!
-  content: String
-  viewCount: Int!
-  authorId: ID
+  content: String!
+  authorId: ID!
 }
 
 input PostUpdateInput {
-  createdAt: DateTime
-  updatedAt: DateTime
   published: Boolean
   title: String
   content: String
