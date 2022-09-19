@@ -18,9 +18,7 @@ const server = async (schema: GraphQLSchema, context: Function) => {
 }
 
 const main = async () => {
-  const schemaWithResolvers = await SchemaLoader();
-
-  server(schemaWithResolvers, context);
+  server(SchemaLoader, context);
 }
 
 main();
