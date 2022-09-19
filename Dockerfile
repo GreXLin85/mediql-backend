@@ -19,6 +19,7 @@ COPY tsconfig.json ./
 
 # Install package.json dependencies
 RUN yarn install --production
+RUN yarn cache clean
 
 # COPY
 COPY . .
