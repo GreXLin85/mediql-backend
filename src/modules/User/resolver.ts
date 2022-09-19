@@ -68,14 +68,14 @@ export default {
 
             return userPosts;
         },
-        comments: async (parent: User, args: any, context: Context, info: any) => {
-            let userComments = await context.prisma.user.findUnique({
+        likedPosts: async (parent: User, args: any, context: Context, info: any) => {
+            let userLikedPosts = await context.prisma.user.findUnique({
                 where: {
                     id: parent.id
                 }
-            }).comments();
+            }).likes();
 
-            return userComments;
+            return userLikedPosts;
         }
     }
 };

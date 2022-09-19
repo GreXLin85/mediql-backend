@@ -39,6 +39,7 @@ type Post {
   title: String!
   content: String
   viewCount: Int!
-  comments: [Comment]
+  likes: Int
+  likedBy: [User]
   author: User!
 }

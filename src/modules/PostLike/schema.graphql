@@ -1,0 +1,18 @@
+scalar DateTime
+
+type PostLike {
+  id: ID!
+  post: Post!
+  user: User!
+}
+
+type Query {
+  postLike(id: ID!): PostLike!
+  postLikes(skip: Int, take: Int): [PostLike!]!
+}
+
+type Mutation {
+  likePost(postId: ID!, userId: ID!): Post
+  unlikePost(postId: ID!, userId: ID!): Post
+}
+

@@ -39,7 +39,7 @@ type User {
   password: String!
   name: String
   posts: [Post]
-  comments: [Comment]
+  likedPosts: [PostLike]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
