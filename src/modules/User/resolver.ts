@@ -1,4 +1,5 @@
 import { User } from '@prisma/client';
+import { AuthenticationError } from 'apollo-server';
 import { ApolloError } from 'apollo-server-express';
 import { Context } from '../../helpers/ContextBuilder';
 import HashHelper from '../../helpers/HashHelper';
@@ -30,9 +31,13 @@ export default {
                 throw new ApolloError('User not found');
             }
             if (await HashHelper.compare(args.password, user.password)) {
-                throw new ApolloError('Wrong password');
+                throw new AuthenticationError('Wrong password');
             }
             return {
+                token: context.jwt.sign(user.id),
+                user: user
+            };
+        },
         register: async (_: any, args: { user: User }, context: Context) => {
             const user = await context.prisma.user.create({ data: args.user });
             return {
