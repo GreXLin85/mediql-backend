@@ -1,6 +1,6 @@
 type Query {
   post(id: ID!): Post
-  posts: [Post]!
+  posts(skip: Int, take: Int): [Post]!
 }
 
 input PostCreateInput {
