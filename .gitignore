@@ -288,4 +288,4 @@ fabric.properties
 # and uncomment the following lines
 # .pnp.*
 
-# End of https://www.toptal.com/developers/gitignore/api/node,webstorm,yarn,git
+.vscode
