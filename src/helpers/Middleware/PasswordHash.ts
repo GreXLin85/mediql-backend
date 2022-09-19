@@ -1,5 +1,5 @@
 import { Prisma, User } from "@prisma/client";
-import HashHelper from "./HashHelper";
+import HashHelper from "../HashHelper";
 
 export default async (params: Prisma.MiddlewareParams, next: (params: Prisma.MiddlewareParams) => Promise<any>) => {
     // Manipulate params here
@@ -20,8 +20,9 @@ export default async (params: Prisma.MiddlewareParams, next: (params: Prisma.Mid
                 }
                 break;
             case 'findUnique':
-            case 'findMany':
             case 'findFirst':
+                console.log(params);
+                
                 if (params.args.where.password) {
                     params.args.where.password = await HashHelper.hash(params.args.where.password);
                 }
@@ -30,6 +31,6 @@ export default async (params: Prisma.MiddlewareParams, next: (params: Prisma.Mid
     }
 
     const result = await next(params)
-    // See results here
+    
     return result
 }
