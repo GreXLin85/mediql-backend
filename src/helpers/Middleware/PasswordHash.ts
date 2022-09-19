@@ -21,8 +21,6 @@ export default async (params: Prisma.MiddlewareParams, next: (params: Prisma.Mid
                 break;
             case 'findUnique':
             case 'findFirst':
-                console.log(params);
-                
                 if (params.args.where.password) {
                     params.args.where.password = await HashHelper.hash(params.args.where.password);
                 }
