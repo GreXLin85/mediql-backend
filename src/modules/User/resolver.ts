@@ -33,7 +33,10 @@ export default {
                 throw new ApolloError('Wrong password');
             }
             return {
-                token: 'token',
+        register: async (_: any, args: { user: User }, context: Context) => {
+            const user = await context.prisma.user.create({ data: args.user });
+            return {
+                token: context.jwt.sign(user.id),
                 user: user
             };
         }
