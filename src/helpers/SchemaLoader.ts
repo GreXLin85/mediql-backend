@@ -1,8 +1,8 @@
-import { loadSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { addResolversToSchema } from '@graphql-tools/schema'
-import { loadFilesSync } from '@graphql-tools/load-files'
 import { join } from 'path'
+import { loadFilesSync } from '@graphql-tools/load-files'
+import { loadSchemaSync } from '@graphql-tools/load'
 import { mergeResolvers } from '@graphql-tools/merge'
 
 const schema = loadSchemaSync(join(__dirname, '/../modules/**/schema.graphql'), { loaders: [new GraphQLFileLoader()] })

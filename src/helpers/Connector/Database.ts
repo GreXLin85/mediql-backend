@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 import PasswordHashMiddleware from '../Middleware/PasswordHash'
 import PrismaCache from '../Middleware/PrismaCache'
 

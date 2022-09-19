@@ -1,16 +1,15 @@
-import { ApolloServer } from 'apollo-server'
-import { GraphQLSchema } from 'graphql'
-import SchemaLoader from './helpers/SchemaLoader';
-import { context } from './helpers/ContextBuilder';
 import * as dotenv from "dotenv";
+import { ApolloServer } from 'apollo-server'
+import { ContextFunc, context } from './helpers/ContextBuilder';
+import { GraphQLSchema } from 'graphql'
 import { join } from 'path';
-dotenv.config({ path: join(__dirname,"/.env") });
+import SchemaLoader from './helpers/SchemaLoader';
+dotenv.config({ path: join(__dirname, "/.env") });
 
-
-const server = async (schema: GraphQLSchema, context: Function) => {
+const server = async (schema: GraphQLSchema, contextf: ContextFunc) => {
   const apolloServer = new ApolloServer({
     schema,
-    context,
+    context: contextf,
   });
 
   const { url } = await apolloServer.listen();

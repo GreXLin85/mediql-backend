@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 import PasswordHashMiddleware from './helpers/Middleware/PasswordHash'
 
 const prisma = new PrismaClient()

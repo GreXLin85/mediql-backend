@@ -1,7 +1,7 @@
-import { User } from '@prisma/client';
-import { AuthenticationError } from 'apollo-server';
 import { ApolloError } from 'apollo-server-express';
+import { AuthenticationError } from 'apollo-server';
 import { Context } from '../../helpers/ContextBuilder';
+import { User } from '@prisma/client';
 import HashHelper from '../../helpers/HashHelper';
 
 export default {
@@ -47,8 +47,8 @@ export default {
         }
     },
     Query: {
-        user: async (parent: any, args: { id: number }, context: Context, info: any) => {
-            let user = await context.prisma.user.findUnique({
+        user: async (parent: any, args: { id: number }, context: Context) => {
+            const user = await context.prisma.user.findUnique({
                 where: {
                     id: args.id
                 }
@@ -60,8 +60,8 @@ export default {
 
             return user;
         },
-        users: async (parent: any, args: { skip: number, take: number }, context: Context, info: any) => {
-            let users = await context.prisma.user.findMany({
+        users: async (parent: any, args: { skip: number, take: number }, context: Context) => {
+            const users = await context.prisma.user.findMany({
                 skip: args.skip,
                 take: args.take
             });
@@ -70,8 +70,8 @@ export default {
         }
     },
     User: {
-        posts: async (parent: User, args: any, context: Context, info: any) => {
-            let userPosts = await context.prisma.user.findUnique({
+        posts: async (parent: User, args: any, context: Context) => {
+            const userPosts = await context.prisma.user.findUnique({
                 where: {
                     id: parent.id
                 }
@@ -79,8 +79,8 @@ export default {
 
             return userPosts;
         },
-        likedPosts: async (parent: User, args: any, context: Context, info: any) => {
-            let userLikedPosts = await context.prisma.user.findUnique({
+        likedPosts: async (parent: User, args: any, context: Context) => {
+            const userLikedPosts = await context.prisma.user.findUnique({
                 where: {
                     id: parent.id
                 }

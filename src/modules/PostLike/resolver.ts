@@ -25,8 +25,8 @@ export default {
         }
     },
     Query: {
-        postLike: async (parent: any, args: { id: number }, context: Context, info: any) => {
-            let postLike = await context.prisma.postLike.findUnique({
+        postLike: async (parent: any, args: { id: number }, context: Context) => {
+            const postLike = await context.prisma.postLike.findUnique({
                 where: {
                     id: args.id
                 }
@@ -38,8 +38,8 @@ export default {
 
             return postLike;
         },
-        postLikes: async (parent: any, args: { skip: number, take: number }, context: Context, info: any) => {
-            let postLikes = await context.prisma.postLike.findMany({
+        postLikes: async (parent: any, args: { skip: number, take: number }, context: Context) => {
+            const postLikes = await context.prisma.postLike.findMany({
                 skip: args.skip,
                 take: args.take
             });
@@ -48,8 +48,8 @@ export default {
         }
     },
     PostLike: {
-        user: async (parent: any, args: any, context: Context, info: any) => {
-            let user = await context.prisma.postLike.findUnique({
+        user: async (parent: any, args: any, context: Context) => {
+            const user = await context.prisma.postLike.findUnique({
                 where: {
                     id: parent.userId
                 }
@@ -57,8 +57,8 @@ export default {
 
             return user;
         },
-        post: async (parent: any, args: any, context: Context, info: any) => {
-            let post = await context.prisma.postLike.findUnique({
+        post: async (parent: any, args: any, context: Context) => {
+            const post = await context.prisma.postLike.findUnique({
                 where: {
                     id: parent.userId
                 }
