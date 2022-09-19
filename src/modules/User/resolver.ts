@@ -10,20 +10,20 @@ export default {
             const user = await context.prisma.user.create({ data: args.user });
             return user;
         },
-        updateUser: async (_: any, args: {id: number, user: User}, context: Context) => {
+        updateUser: async (_: any, args: { id: number, user: User }, context: Context) => {
             const user = await context.prisma.user.update({
                 where: { id: args.id },
                 data: args.user
             });
             return user;
         },
-        deleteUser: async (_: any, args: {id: number}, context: Context) => {
+        deleteUser: async (_: any, args: { id: number }, context: Context) => {
             const user = await context.prisma.user.delete({
                 where: { id: args.id }
             });
             return user;
         },
-        login: async (_: any, args: {email: string, password: string}, context: Context) => {
+        login: async (_: any, args: { email: string, password: string }, context: Context) => {
             const user = await context.prisma.user.findUnique({
                 where: { email: args.email }
             });
