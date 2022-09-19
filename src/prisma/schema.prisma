@@ -11,26 +11,26 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
   password  String
   name      String?
   posts     Post[]
   likes     PostLike[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now())
 }
 
 model Post {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now())
-  published Boolean   @default(false)
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now())
+  published Boolean    @default(false)
   title     String
   content   String?
-  viewCount Int       @default(0)
+  viewCount Int        @default(0)
   likes     PostLike[]
-  author    User      @relation(fields: [authorId], references: [id])
+  author    User       @relation(fields: [authorId], references: [id])
   authorId  Int
 }
 
