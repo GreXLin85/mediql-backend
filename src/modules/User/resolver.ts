@@ -38,7 +38,7 @@ export default {
                 user: user
             };
         },
-        register: async (_: any, args: { user: User }, context: Context) => {
+        signup: async (_: any, args: { user: User }, context: Context) => {
             const user = await context.prisma.user.create({ data: args.user });
             return {
                 token: context.jwt.sign(user.id),
