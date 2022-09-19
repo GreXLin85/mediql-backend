@@ -16,7 +16,7 @@ model User {
   password  String
   name      String?
   posts     Post[]
-  comments  Comment[]
+  likes     PostLike[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now())
 }
@@ -29,16 +29,19 @@ model Post {
   title     String
   content   String?
   viewCount Int       @default(0)
-  comments  Comment[]
+  likes     PostLike[]
   author    User      @relation(fields: [authorId], references: [id])
   authorId  Int
 }
 
-model Comment {
-  id       Int    @id @default(autoincrement())
-  post     Post   @relation(fields: [postId], references: [id])
-  postId   Int
-  comment  String
-  author   User   @relation(fields: [authorId], references: [id])
-  authorId Int
+model PostLike {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+
+  @@unique([postId, userId])
 }
