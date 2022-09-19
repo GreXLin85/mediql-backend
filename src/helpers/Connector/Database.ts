@@ -3,7 +3,7 @@ import PasswordHashMiddleware from '../Middleware/PasswordHash'
 import PrismaCache from '../Middleware/PrismaCache'
 
 const prisma = new PrismaClient({
-    log: ['query', 'info', 'warn', 'error'],
+    log: ['info', 'warn', 'error'],
 })
 
 prisma.$use(PasswordHashMiddleware)
