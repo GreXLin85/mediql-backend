@@ -1,6 +1,6 @@
 type Query {
   user(id: ID!): User
-  users: [User!]!
+  users(skip: Int, take: Int): [User!]!
 }
 
 input UserCreateInput {

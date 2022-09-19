@@ -52,8 +52,11 @@ export default {
 
             return user;
         },
-        users: async (parent: any, args: any, context: Context, info: any) => {
-            let users = await context.prisma.user.findMany();
+        users: async (parent: any, args: { skip: number, take: number }, context: Context, info: any) => {
+            let users = await context.prisma.user.findMany({
+                skip: args.skip,
+                take: args.take
+            });
 
             return users;
         }
