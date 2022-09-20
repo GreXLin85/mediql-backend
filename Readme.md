@@ -3,6 +3,7 @@
 
 GraphQL based Medium clone Backend
 
+[![CodeFactor](https://www.codefactor.io/repository/github/grexlin85/mediql-backend/badge)](https://www.codefactor.io/repository/github/grexlin85/mediql-backend)
 ## ▶ Install
 
 Clone Project
