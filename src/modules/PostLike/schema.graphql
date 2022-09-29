@@ -7,12 +7,12 @@ type PostLike {
 }
 
 type Query {
-  postLike(id: ID!): PostLike!
-  postLikes(skip: Int, take: Int): [PostLike!]!
+  postLike(id: ID!): PostLike! @auth(requires: [ADMIN,REVIEWER])
+  postLikes(skip: Int, take: Int): [PostLike!]! @auth(requires: [ADMIN,REVIEWER])
 }
 
 type Mutation {
-  likePost(postId: ID!, userId: ID!): Post
-  unlikePost(postId: ID!, userId: ID!): Post
+  likePost(postId: ID!, userId: ID!): Post @isLoggedIn
+  unlikePost(postId: ID!, userId: ID!): Post @isLoggedIn
 }
 

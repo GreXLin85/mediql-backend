@@ -19,9 +19,9 @@ input PostUpdateInput {
 }
 
 type Mutation {
-  createPost(post: PostCreateInput!): Post
-  updatePost(id: ID!, post: PostUpdateInput!): Post
-  deletePost(id: ID!): Post
+  createPost(post: PostCreateInput!): Post @isLoggedIn
+  updatePost(id: ID!, post: PostUpdateInput!): Post @isLoggedIn
+  deletePost(id: ID!): Post @isLoggedIn
 }
 
 scalar DateTime
@@ -35,6 +35,6 @@ type Post {
   content: String
   viewCount: Int!
   likeCount: Int
-  likedBy: [User]
+  likedBy: [User] @auth(requires: [REVIEWER,ADMIN])
   author: User!
 }

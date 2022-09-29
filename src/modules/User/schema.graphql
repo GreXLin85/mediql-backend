@@ -1,6 +1,13 @@
+directive @auth(
+  requires: [Role] = [ADMIN],
+) on FIELD_DEFINITION
+directive @isLoggedIn on FIELD_DEFINITION
+directive @isOnlyCanSeeSelf on FIELD_DEFINITION
+
 type Query {
+  me: User @isLoggedIn
   user(id: ID!): User
-  users(skip: Int, take: Int): [User!]!
+  users(skip: Int, take: Int): [User!]! @auth(requires: [ADMIN])
 }
 
 input UserCreateInput {
@@ -26,20 +33,29 @@ type AuthPayload {
 type Mutation {
   login(email: String!, password: String!): AuthPayload!
   signup(email: String!, password: String!, name: String): AuthPayload!
-  createUser(user: UserCreateInput!): User
-  updateUser(id: ID!, user: UserUpdateInput!): User
-  deleteUser(id: ID!): User
+  createUser(user: UserCreateInput!): User @auth
+  updateUser(id: ID!, user: UserUpdateInput!): User @auth
+  deleteUser(id: ID!): User @auth
 }
 
 scalar DateTime
 
+enum Role {
+  ADMIN
+  REVIEWER
+  VERIFIED_CONTENT_CREATOR
+  CONTENT_CREATOR
+  USER
+}
+
 type User {
   id: ID!
-  email: String!
-  password: String!
+  email: String! @isLoggedIn @isOnlyCanSeeSelf
+  password: String! @auth(requires: [ADMIN])
   name: String
   posts: [Post]
-  likedPosts: [PostLike]
+  likedPosts: [PostLike] @isLoggedIn @isOnlyCanSeeSelf
+  lastAuthToken: String @auth(requires: [ADMIN])
   createdAt: DateTime!
-  updatedAt: DateTime!
+  updatedAt: DateTime! @isLoggedIn
 }
