@@ -17,6 +17,8 @@ model User {
   name      String?
   posts     Post[]
   likes     PostLike[]
+  role      Role       @default(USER)
+  isVerified Boolean   @default(false)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @default(now())
 }
@@ -44,4 +46,12 @@ model PostLike {
   userId    Int
 
   @@unique([postId, userId])
+}
+
+enum Role {
+  ADMIN
+  REVIEWER
+  VERIFIED_CONTENT_CREATOR
+  CONTENT_CREATOR
+  USER
 }
