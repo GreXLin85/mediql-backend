@@ -1,4 +1,3 @@
-import { AuthenticationError } from 'apollo-server';
 import jwt from 'jsonwebtoken';
 
 export default {
@@ -14,9 +13,9 @@ export default {
     verify: (token: string) => {
         return jwt.verify(token, process.env.JWT_SECRET as string, (err, decoded) => {
             if (err) {
-                throw new AuthenticationError('Invalid token');
+                return null;
             }
             return decoded;
-        });
+        }) as unknown as { id: number } | null;
     }
 }
