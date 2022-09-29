@@ -1,4 +1,4 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv'
 import { ApolloServer } from 'apollo-server'
 import { ContextFunc, context } from './helpers/ContextBuilder';
 import { GraphQLSchema } from 'graphql'
