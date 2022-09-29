@@ -81,6 +81,15 @@ export default {
 
             return likedBy;
         },
+        author: async (parent: any, args: any, context: Context) => {
+            // Post author
+            const author = await context.prisma.post.findUnique({
+                where: {
+                    id: parent.id
+                }
+            }).author();
 
+            return author;
+        },
     },
 };
