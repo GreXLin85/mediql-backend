@@ -30,7 +30,7 @@ export default {
             if (!user) {
                 throw new ApolloError('User not found');
             }
-            if (await HashHelper.compare(args.password, user.password)) {
+            if (await HashHelper.compare(user.password, args.password)) {
                 throw new AuthenticationError('Wrong password');
             }
             return {
