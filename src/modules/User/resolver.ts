@@ -47,6 +47,9 @@ export default {
         }
     },
     Query: {
+        me: async (_: any, args: any, context: Context) => {
+            return context.user;
+        },
         user: async (parent: any, args: { id: number }, context: Context) => {
             const user = await context.prisma.user.findUnique({
                 where: {
