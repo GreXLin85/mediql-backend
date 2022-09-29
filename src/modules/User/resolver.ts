@@ -90,6 +90,11 @@ export default {
             }).likes();
 
             return userLikedPosts;
-        }
+        },
+        lastAuthToken: async (parent: User, args: any, context: Context) => {
+            const lastAuthToken = await context.redis.get(`user:${parent.id}:authtoken`);
+
+            return lastAuthToken;
+        },
     }
 };
