@@ -53,6 +53,7 @@ type User {
   email: String! @isLoggedIn @isOnlyCanSeeSelf
   password: String! @auth(requires: [ADMIN])
   name: String
+  role: Role
   posts: [Post]
   likedPosts: [PostLike] @isLoggedIn @isOnlyCanSeeSelf
   lastAuthToken: String @auth(requires: [ADMIN])
