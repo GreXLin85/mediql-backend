@@ -34,14 +34,14 @@ export default {
                 throw new AuthenticationError('Wrong password');
             }
             return {
-                token: context.jwt.sign(user.id),
+                token: await context.session.sign(user.id),
                 user: user
             };
         },
         signup: async (_: any, args: { user: User }, context: Context) => {
             const user = await context.prisma.user.create({ data: args.user });
             return {
-                token: context.jwt.sign(user.id),
+                token: await context.session.sign(user.id),
                 user: user
             };
         }
