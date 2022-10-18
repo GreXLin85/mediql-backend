@@ -10,6 +10,11 @@ export default (params: Array<Record<Role, any>> | undefined, resolve: GraphQLFi
 
     const operationName = info.operation.name?.value.toLowerCase();
     if (operationName === 'login' || operationName === 'signup') {
+
+      if (source?.role === 'ADMIN' || context.user?.role === 'ADMIN') {
+        return resolve(source, args, context, info);
+      }
+
       if (!requiredRoles.includes(source.role)) {
         throw new AuthenticationError('You do not have permission to access this resource');
       }
@@ -19,6 +24,10 @@ export default (params: Array<Record<Role, any>> | undefined, resolve: GraphQLFi
 
     if (!context.user) {
       throw new AuthenticationError('You must be logged in to access this resource');
+    }
+
+    if (context.user?.role === 'ADMIN') {
+      return resolve(source, args, context, info);
     }
 
     if (!requiredRoles.includes(context.user.role)) {
