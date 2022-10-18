@@ -289,3 +289,5 @@ fabric.properties
 # .pnp.*
 
 .vscode
+.idea
+.fleet
