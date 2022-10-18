@@ -34,8 +34,6 @@ export default (params: Array<Record<Role, any>> | undefined, resolve: GraphQLFi
       throw new AuthenticationError('You do not have permission to access this resource');
     }
 
-    const result = await resolve(source, args, context, info);
-
-    return result;
+    return await resolve(source, args, context, info);
   }
 }
