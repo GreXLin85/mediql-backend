@@ -35,6 +35,6 @@ type Post {
   content: String
   viewCount: Int!
   likeCount: Int
-  likedBy: [User] @auth(requires: [REVIEWER,ADMIN])
+  likedBy: [PostLike] @auth(requires: [REVIEWER,ADMIN])
   author: User!
 }
